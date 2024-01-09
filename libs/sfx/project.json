@@ -1,0 +1,59 @@
+{
+  "name": "sfx",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/sfx/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/sfx",
+        "main": "libs/sfx/src/index.ts",
+        "tsConfig": "libs/sfx/tsconfig.lib.json",
+        "assets": ["libs/sfx/*.md", "libs/sfx/src/config/*.json"]
+      }
+    },
+    "install": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm i --prefix 'dist/libs/sfx' && npm i -g dist/libs/sfx"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/sfx/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/sfx/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "update-version": {
+      "executor": "nx-release:update-version",
+      "options": {
+        "libName": "sfx"
+      }
+    },
+    "publish": {
+      "executor": "nx-release:npm-publish",
+      "options": {
+        "libName": "sfx"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Setup",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "ciCd": {
+      "type": "string",
+      "x-prompt": {
+        "type": "select",
+        "message": "Choose your repository platform:",
+        "items": [
+          { "value": "Github", "label": "Github" },
+          { "value": "Gitlab", "label": "Gitlab" },
+          { "value": "Bitbucket", "label": "Bitbucket" },
+          { "value": "Azure", "label": "Azure" }
+        ]
+      }
+    }
+  },
+  "required": ["ciCd"]
+}

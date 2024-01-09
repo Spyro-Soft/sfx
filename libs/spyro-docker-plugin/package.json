@@ -1,0 +1,15 @@
+{
+  "name": "@spyrosoft/spyro-docker-plugin",
+  "version": "1.8.0",
+  "type": "commonjs",
+  "generators": "./generators.json",
+  "dependencies": {
+    "@nx/plugin": "^16.2.2"
+  },
+  "scripts": {
+    "version-update": "npm version major"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

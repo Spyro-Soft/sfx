@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Setup",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "extend": {
+      "type": "boolean",
+      "x-prompt": {
+        "type": "boolean",
+        "message": "Do you want to extend your config with our rules(Yes) or overwrite it(No)?"
+      }
+    },
+    "framework": {
+      "type": "string"
+    },
+    "appName": {
+      "type": "string"
+    }
+  }
+}

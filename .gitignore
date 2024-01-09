@@ -1,0 +1,181 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/tools/spyro-cli/react-app
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+.env
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.angular
+
+# env files
+/apps/uma-angular/.env
+/apps/uma-angular-e2e/.env
+/apps/uma-react/.env
+/apps/uma-react-e2e/.env
+
+
+# Created by https://www.gitignore.io/api/c,c++,cmake,ninja,assembler
+# Edit at https://www.gitignore.io/?templates=c,c++,cmake,ninja,assembler
+
+build/
+out/
+__pycache__/
+.coverage/
+.idea/
+*.pyc
+*.log
+_autosummary/
+node_modules/
+dist/
+
+*package-lock.json
+
+### Assembler ###
+*.exe
+*.o
+*.obj
+*.bc
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
+*.ko
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+### C++ ###
+# Prerequisites
+
+# Compiled Object files
+*.slo
+
+# Precompiled Headers
+
+# Compiled Dynamic libraries
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+
+# Executables
+
+### CMake ###
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+### CMake Patch ###
+# External projects
+*-prefix/
+
+### Ninja ###
+.ninja_deps
+.ninja_log
+
+# End of https://www.gitignore.io/api/c,c++,cmake,ninja,assembler
+ozone.jdebug.user
+.coverage
+
+# Other
+poetry.lock
+pyproject.toml
+.python-version
+
+# Frontend
+frontend/node_modules
+
+# Cypress
+allure-results
+allure-report
+
+# Next.js
+.next

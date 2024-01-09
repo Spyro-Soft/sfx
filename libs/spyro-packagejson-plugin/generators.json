@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "add-scripts": {
+      "factory": "./src/generators/add-scripts/generator",
+      "schema": "./src/generators/add-scripts/schema.json",
+      "description": "add-scripts generator"
+    },
+    "update": {
+      "factory": "./src/generators/update/generator",
+      "schema": "./src/generators/update/schema.json",
+      "description": "update generator"
+    }
+  }
+}

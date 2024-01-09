@@ -1,0 +1,88 @@
+{
+  "name": "spyro-plugin-manager",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/spyro-plugin-manager/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/spyro-plugin-manager",
+        "main": "libs/spyro-plugin-manager/src/index.ts",
+        "tsConfig": "libs/spyro-plugin-manager/tsconfig.lib.json",
+        "assets": [
+          "libs/spyro-plugin-manager/*.md",
+          {
+            "input": "./libs/spyro-plugin-manager/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/spyro-plugin-manager/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/spyro-plugin-manager",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/spyro-plugin-manager",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ],
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/spyro-plugin-manager/**/*.ts",
+          "libs/spyro-plugin-manager/package.json",
+          "libs/spyro-plugin-manager/generators.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/spyro-plugin-manager/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "version-update": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "version-update"
+      }
+    },
+    "publish": {
+      "executor": "nx-release:npm-publish",
+      "options": {
+        "libName": "spyro-plugin-manager"
+      }
+    },
+    "publish-local": {
+      "command": "node scripts/local-publish.js spyro-plugin-manager"
+    },
+    "update-version": {
+      "executor": "nx-release:update-version",
+      "options": {
+        "libName": "spyro-plugin-manager"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@spyrosoft/sfx": [
+        "libs/sfx/src/index.ts"
+      ],
+      "@spyrosoft/spyro-docker-plugin": [
+        "libs/spyro-docker-plugin/src/index.ts"
+      ],
+      "@spyrosoft/spyro-eslint-plugin": [
+        "libs/spyro-eslint-plugin/src/index.ts"
+      ],
+      "@spyrosoft/spyro-husky-plugin": [
+        "libs/spyro-husky-plugin/src/index.ts"
+      ],
+      "@spyrosoft/spyro-packagejson-plugin": [
+        "libs/spyro-packagejson-plugin/src/index.ts"
+      ],
+      "@spyrosoft/spyro-plugin-manager": [
+        "libs/spyro-plugin-manager/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

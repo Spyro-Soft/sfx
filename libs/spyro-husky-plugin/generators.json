@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "setup": {
+      "factory": "./src/generators/setup/generator",
+      "schema": "./src/generators/setup/schema.json",
+      "description": "setup generator"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+image: node:18.16.0
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - dependecies
+  - check
+  - test
+  - build
+
+install-dependencies:
+  stage: dependecies
+  script: npm install
+  artifacts:
+    expire_in: 180 min
+    paths:
+      - node_modules/
+  allow_failure: false
+
+lint:
+  stage: check
+  script: npm run lint:check
+  allow_failure: false
+
+test:
+  stage: test
+  script: npm run test
+  allow_failure: false
+
+build-job:
+  stage: build
+  script: npm run build
+  allow_failure: false

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Update",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "appName": {
+      "type": "string",
+      "x-prompt": "What is the name of your main project?"
+    },
+    "framework": {
+      "type": "string",
+      "x-prompt": {
+        "type": "select",
+        "message": "Which framework is used in your main project?",
+        "items": [
+          { "value": "angular", "label": "Angular" },
+          { "value": "react", "label": "React" }
+        ]
+      }
+    },
+    "overwriteDocker": {
+      "type": "boolean",
+      "default": true
+    },
+    "extendEslint": {
+      "type": "boolean",
+      "default": false
+    },
+    "overwriteScripts": {
+      "type": "boolean",
+      "default": true
+    },
+    "updateHusky": {
+      "type": "boolean",
+      "default": true
+    },
+    "ciCd": {
+      "type": "string",
+      "default": true
+    }
+  },
+  "required": ["appName", "framework"]
+}
+

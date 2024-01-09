@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Update",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "overwriteScripts": {
+      "type": "boolean",
+      "default": true
+    },
+    "appName": {
+      "type": "string"
+    }
+  },
+  "required": ["appName"]
+}

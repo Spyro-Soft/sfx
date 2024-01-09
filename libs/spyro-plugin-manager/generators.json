@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "setup-all": {
+      "factory": "./src/generators/setup-all/generator",
+      "schema": "./src/generators/setup-all/schema.json",
+      "description": "setup-all generator"
+    },
+    "update": {
+      "factory": "./src/generators/update/generator",
+      "schema": "./src/generators/update/schema.json",
+      "description": "update generator"
+    }
+  }
+}

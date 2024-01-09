@@ -1,0 +1,3 @@
+{
+  "extends": ["@spyrosoft/eslint-config-spyro"]
+}

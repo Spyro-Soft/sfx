@@ -1,0 +1,12 @@
+{
+  "name": "@spyrosoft/spyro-packagejson-plugin",
+  "version": "1.8.0",
+  "type": "commonjs",
+  "generators": "./generators.json",
+  "scripts": {
+    "version-update": "npm version major"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

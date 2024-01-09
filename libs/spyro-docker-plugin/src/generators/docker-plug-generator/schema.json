@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "DockerPlugGenerator",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "framework": {
+      "type": "string",
+      "x-prompt": {
+        "type": "select",
+        "message": "Choose your framework:",
+        "items": [
+          { "value": "angular", "label": "Angular" },
+          { "value": "react", "label": "React" }
+        ]
+      }
+    }
+  },
+  "required": ["framework"]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@spyrosoft/spyro-plugin-manager",
+  "version": "1.6.1",
+  "type": "commonjs",
+  "generators": "./generators.json",
+  "scripts": {
+    "version-update": "npm version major"
+  },
+  "dependencies": {
+    "@spyrosoft/spyro-ci-cd-plugin": "latest",
+    "@spyrosoft/spyro-docker-plugin": "latest",
+    "@spyrosoft/spyro-eslint-plugin": "latest",
+    "@spyrosoft/spyro-husky-plugin": "latest",
+    "@spyrosoft/spyro-packagejson-plugin": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

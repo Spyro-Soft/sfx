@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SetupAll",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "appName": {
+      "type": "string"
+    },
+    "framework": {
+      "type": "string"
+    },
+    "extend": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["appName", "framework"]
+}

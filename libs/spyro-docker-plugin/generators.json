@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "setup": {
+      "factory": "./src/generators/docker-plug-generator/generator",
+      "schema": "./src/generators/docker-plug-generator/schema.json",
+      "description": "Docker_plug_generator generator"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "name": "spyro-ci-cd-plugin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/spyro-ci-cd-plugin/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/spyro-ci-cd-plugin",
+        "main": "libs/spyro-ci-cd-plugin/src/index.ts",
+        "tsConfig": "libs/spyro-ci-cd-plugin/tsconfig.lib.json",
+        "assets": [
+          "libs/spyro-ci-cd-plugin/*.md",
+          {
+            "input": "./libs/spyro-ci-cd-plugin/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/spyro-ci-cd-plugin/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/spyro-ci-cd-plugin",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/spyro-ci-cd-plugin",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/spyro-ci-cd-plugin/**/*.ts",
+          "libs/spyro-ci-cd-plugin/package.json",
+          "libs/spyro-ci-cd-plugin/generators.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/spyro-ci-cd-plugin/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "version-update": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "version-update"
+      }
+    },
+    "publish": {
+      "executor": "nx-release:npm-publish",
+      "options": {
+        "libName": "spyro-ci-cd-plugin"
+      }
+    },
+    "update-version": {
+      "executor": "nx-release:update-version",
+      "options": {
+        "libName": "spyro-ci-cd-plugin"
+      }
+    }
+  },
+  "tags": []
+}
