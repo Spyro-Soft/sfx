@@ -20,12 +20,14 @@ jobs:
           - windows-latest
           - macos-latest
     runs-on: ${{ matrix.platform }}
-    container:
-      image: node:18
     steps:
       - name: Set artifact name variable
         run: |
           echo "GIT_ARTIFACT_NAME=${GITHUB_REF_NAME//\//_}-${{ matrix.platform }}-${GITHUB_SHA::8}" >> $GITHUB_ENV
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run many
@@ -62,8 +64,6 @@ jobs:
           - framework: angular
             extra_args: "--routing=true --standaloneComponents=false"
     runs-on: ${{ matrix.platform }}
-    container:
-      image: node:18
     needs: Build
     steps:
       - name: Set environment variables
@@ -78,6 +78,10 @@ jobs:
           else
             echo "RETENTION_DAYS=1" >> $GITHUB_ENV
           fi
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
