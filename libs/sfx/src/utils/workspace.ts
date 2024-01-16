@@ -80,6 +80,10 @@ export function replaceDependencyVersionWithStrictVersion(): void {
 
 export function commitAllChanges(): void {
   try {
+    const user = 'git config --global user.name "Chewbacca"';
+    const email = 'git config --global user.email "chewbacca@millennium.falcon"';
+    execSync(user, {encoding: 'utf8'})
+    execSync(email, {encoding: 'utf8'})
     const commands = ['git add .', 'git commit -m "ci: additional config"'];
     const toExecute = commands.reduce((a, b) => a + ' && ' + b);
     execSync(toExecute, { stdio: 'ignore' });
