@@ -4,6 +4,12 @@ import { IFormOptionsCreate } from '../interfaces/form-options.js';
 export interface ICliArguments extends Partial<IFormOptionsCreate> {
   operationType: OPERATION_TYPE;
   verbose?: boolean;
+  framework?: string;
+  bundler?: string;
+  monorepoName?: string;
+  errorMonitoringConsent?: boolean;
+  repositoryPlatforms?: string;
+  appName?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
