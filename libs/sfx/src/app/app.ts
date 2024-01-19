@@ -38,18 +38,21 @@ export function terminateAppIfRequirementsNotMet(cliArguments: ICliArguments): v
 }
 
 export function callInquirerAndProcessAnswers(cliArguments: ICliArguments): void {
-  if(cliArguments.appName) {
-    processAppQuestionareCreate({
-      appName: cliArguments.appName,
-      repositoryPlatforms: cliArguments.repositoryPlatforms,
-      routing: cliArguments.routing,
-      errorMonitoringConsent: cliArguments.errorMonitoringConsent,
-      bundler: cliArguments.bundler,
-      standaloneComponents: cliArguments.standaloneComponents,
-      framework: cliArguments.framework,
-      monorepoName: cliArguments.monorepoName,
-      nextjsRouting: cliArguments.nextjsRouting
-    }, cliArguments.verbose)
+  if (cliArguments.appName) {
+    processAppQuestionareCreate(
+      {
+        appName: cliArguments.appName,
+        repositoryPlatforms: cliArguments.repositoryPlatforms,
+        routing: cliArguments.routing,
+        errorMonitoringConsent: cliArguments.errorMonitoringConsent,
+        bundler: cliArguments.bundler,
+        standaloneComponents: cliArguments.standaloneComponents,
+        framework: cliArguments.framework,
+        monorepoName: cliArguments.monorepoName,
+        nextjsRouting: cliArguments.nextjsRouting,
+      },
+      cliArguments.verbose
+    );
   }
   switch (cliArguments.operationType) {
     case OPERATION_TYPE.create: {
