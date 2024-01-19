@@ -4,7 +4,7 @@ import { IFormOptionsCreate } from '../interfaces/form-options.js';
 export interface ICliArguments extends Partial<IFormOptionsCreate> {
   operationType: OPERATION_TYPE;
   verbose?: boolean;
-framework?: string;
+  framework?: string;
   bundler?: string;
   monorepoName?: string;
   errorMonitoringConsent?: boolean 
