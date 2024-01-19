@@ -1,4 +1,5 @@
 import { Tree } from '@nx/devkit';
+import { setupGenerator as architectureGenerator } from '@spyrosoft/spyro-architecture-plugin';
 import { setupGenerator as ciCdGenerator } from '@spyrosoft/spyro-ci-cd-plugin';
 import { myDockerfileGenerator as dockerGenerator } from '@spyrosoft/spyro-docker-plugin';
 import { setupGenerator as eslintGenerator } from '@spyrosoft/spyro-eslint-plugin';
@@ -14,6 +15,7 @@ export async function setupAllGenerator(tree: Tree, options: ISetupAllGeneratorS
   await addScriptsGenerator(tree, options);
   await dockerGenerator(tree, options);
   await ciCdGenerator(tree, options);
+  await architectureGenerator(tree, options);
 
   return () => {
     execSync('npm install');
