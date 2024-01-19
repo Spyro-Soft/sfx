@@ -11,7 +11,8 @@
     "@spyrosoft/spyro-docker-plugin": "latest",
     "@spyrosoft/spyro-eslint-plugin": "latest",
     "@spyrosoft/spyro-husky-plugin": "latest",
-    "@spyrosoft/spyro-packagejson-plugin": "latest"
+    "@spyrosoft/spyro-packagejson-plugin": "latest",
+    "@spyrosoft/spyro-architecture-plugin": "latest"
   },
   "publishConfig": {
     "access": "public"

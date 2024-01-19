@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateLib",
+  "title": "Create lib generator schema",
+  "type": "object"
+}

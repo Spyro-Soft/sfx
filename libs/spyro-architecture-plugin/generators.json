@@ -1,0 +1,19 @@
+{
+  "generators": {
+    "setup": {
+      "factory": "./src/generators/setup/generator",
+      "schema": "./src/generators/setup/schema.json",
+      "description": "setup generator that adds create-lib and group scripts to package.json of existing project"
+    },
+    "create-lib": {
+      "factory": "./src/generators/create-lib/generator",
+      "schema": "./src/generators/create-lib/schema.json",
+      "description": "create-lib generator that allow user to create new app or lib of various types to existing project"
+    },
+    "group": {
+      "factory": "./src/generators/group/generator",
+      "schema": "./src/generators/group/schema.json",
+      "description": "group generator that allow user to group added apps or libs by their type"
+    }
+  }
+}

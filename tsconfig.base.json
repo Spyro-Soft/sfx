@@ -18,6 +18,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sfx/spyro-architecture-plugin": [
+        "libs/spyro-architecture-plugin/src/index.ts"
+      ],
       "@spyrosoft/sfx": [
         "libs/sfx/src/index.ts"
       ],
