@@ -38,7 +38,7 @@ export function terminateAppIfRequirementsNotMet(cliArguments: ICliArguments): v
 }
 
 export function callInquirerAndProcessAnswers(cliArguments: ICliArguments): void {
- if(cliArguments.appName) {
+  if(cliArguments.appName) {
     processAppQuestionareCreate({
       appName: cliArguments.appName,
       repositoryPlatforms: cliArguments.repositoryPlatforms,
