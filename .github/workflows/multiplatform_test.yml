@@ -1,0 +1,129 @@
+name: Build and test apps
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+  workflow_call:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:       
+  Build:
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Set artifact name variable
+        run: |
+          echo "GIT_ARTIFACT_NAME=${GITHUB_REF_NAME//\//_}-${{ matrix.platform }}-${GITHUB_SHA::8}" >> $GITHUB_ENV
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run many
+        run: |
+          npm i
+          npm i --prefix 'libs/sfx'
+          npx nx local-registry &
+          sleep 10
+          npx nx run-many --targets=publish-local
+          npx nx run sfx:build
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.GIT_ARTIFACT_NAME }}"
+          path: dist
+          retention-days: 1
+  
+  Create-and-Test:
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        framework:
+          - react
+          - angular
+        bundler:
+          - vite
+          - webpack
+        include:
+          - framework: react
+            extra_args: ""
+          - framework: angular
+            extra_args: "--routing=true --standaloneComponents=false"
+    runs-on: ${{ matrix.platform }}
+    needs: Build
+    steps:
+      - name: Set environment variables
+        run: |
+          echo "GIT_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "GIT_ARTIFACT_NAME=${GITHUB_REF_NAME//\//_}-${{ matrix.platform }}-${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "GIT_REF_PARSED=${GITHUB_REF_NAME//\//_}" >> $GITHUB_ENV
+          echo "MONOREPO_NAME=test-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}" >> $GITHUB_ENV
+          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            echo "RETENTION_DAYS=90" >> $GITHUB_ENV
+          elif [[ "${GITHUB_REF_NAME}" == "develop" ]]; then
+            echo "RETENTION_DAYS=30" >> $GITHUB_ENV
+          else
+            echo "RETENTION_DAYS=1" >> $GITHUB_ENV
+          fi
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "${{ env.GIT_ARTIFACT_NAME }}"
+          path: "./dist"
+      - name: Create App
+        continue-on-error: true
+        run: |
+          cd "dist/libs/sfx"
+          npm i
+          npx sfx create --framework="${{ matrix.framework }}" --bundler="${{ matrix.bundler }}" --monorepoName="${{ env.MONOREPO_NAME }}" ${{ matrix.extra_args }} --errorMonitoringConsent="false" --repositoryPlatforms="Github" --appName="testapp"
+      - name: Test app - prepare
+        run: |
+          mv "dist/libs/sfx/${{ env.MONOREPO_NAME }}" "${{ github.workspace }}"
+          cd "${{ env.MONOREPO_NAME }}"
+          # sudo apt-get update -qq && sudo apt-get install -qq -y --no-install-recommends libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+          npm i puppeteer
+          npx puppeteer browsers install chrome
+      - name: Test app - run
+        run: |
+          cd "${{ env.MONOREPO_NAME }}"
+          npx nx serve testapp &
+          sleep 10
+          node -e "
+            const puppeteer = require('puppeteer');
+            (async () => {
+              const browser = await puppeteer.launch({
+                headless: 'new',
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                });
+              const page = await browser.newPage();
+              await page.goto('http://localhost:4200');
+              await page.screenshot({
+                path: 'screenshot.jpg',
+                fullPage: true,
+              });
+              await browser.close();
+              console.log('\x1b[32m \u2713 App ran SUCCESSFULLY\tSaving screenshot...');
+            })();"
+      - name: Upload Test Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ env.GIT_REF_PARSED }}-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}-${{ env.GIT_SHA_SHORT }}"
+          path: "${{ env.MONOREPO_NAME }}/screenshot.jpg"
+          retention-days: ${{ env.RETENTION_DAYS }}
