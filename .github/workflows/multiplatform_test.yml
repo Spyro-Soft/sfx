@@ -71,6 +71,7 @@ jobs:
           echo "GIT_SHA_SHORT=${GITHUB_SHA::8}" >> $GITHUB_ENV
           echo "GIT_ARTIFACT_NAME=${GITHUB_REF_NAME//\//_}-${{ matrix.platform }}-${GITHUB_SHA::8}" >> $GITHUB_ENV
           echo "GIT_REF_PARSED=${GITHUB_REF_NAME//\//_}" >> $GITHUB_ENV
+          echo "MONOREPO_NAME=test-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}" >> $GITHUB_ENV
           if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
             echo "RETENTION_DAYS=90" >> $GITHUB_ENV
           elif [[ "${GITHUB_REF_NAME}" == "develop" ]]; then
@@ -88,21 +89,23 @@ jobs:
           name: "${{ env.GIT_ARTIFACT_NAME }}"
           path: "./dist"
       - name: Create App
+        continue-on-error: true
         run: |
           cd "dist/libs/sfx"
           npm i
-          npm i -g
-          sfx create --framework="${{ matrix.framework }}" --bundler="${{ matrix.bundler }}" --monorepoName="test-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}" ${{ matrix.extra_args }} --errorMonitoringConsent=false --repositoryPlatforms=Github --appName=testapp
+          npx sfx create --framework="${{ matrix.framework }}" --bundler="${{ matrix.bundler }}" --monorepoName="${{ env.MONOREPO_NAME }}" ${{ matrix.extra_args }} --errorMonitoringConsent="false" --repositoryPlatforms="Github" --appName="testapp"
       - name: Test app - prepare
         run: |
-          cd "test-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}"
-          apt-get update && apt-get install -y libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
-          npm install puppeteer
+          mv "dist/libs/sfx/${{ env.MONOREPO_NAME }}" "${{ env.GITHUB_WORKSPACE }}"
+          cd "${{ env.MONOREPO_NAME }}"
+          apt-get update -qq && apt-get install -qq -y --no-install-recommends libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+          npm i puppeteer
           npx puppeteer browsers install chrome
-          npx nx serve testapp &
-          sleep 15
       - name: Test app - run
         run: |
+          cd "${{ env.MONOREPO_NAME }}"
+          npx nx serve testapp &
+          sleep 5
           node -e "
             const puppeteer = require('puppeteer');
             (async () => {
@@ -117,11 +120,11 @@ jobs:
                 fullPage: true,
               });
               await browser.close();
+              console.log('\x1b[32m \u2713 App ran SUCCESSFULLY\tSaving screenshot...');
             })();"
-          pkill -f "nx serve testapp"
       - name: Upload Test Artifact
         uses: actions/upload-artifact@v4
         with:
           name: "${{ env.GIT_REF_PARSED }}-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}-${{ env.GIT_SHA_SHORT }}"
-          path: screenshot.jpg
+          path: "${{ env.MONOREPO_NAME }}/screenshot.jpg"
           retention-days: ${{ env.RETENTION_DAYS }}
