@@ -1,0 +1,36 @@
+image: node:18.16.0
+
+pipelines:
+  default:
+    - step:
+        name: Install Dependencies
+        caches:
+          - node
+        script:
+          - npm install
+        artifacts:
+          - node_modules/**
+        timeout_in_minutes: 180
+        failure:
+          never
+
+    - step:
+        name: Lint
+        script:
+          - npm run lint:check
+        failure:
+          always
+
+    - step:
+        name: Test
+        script:
+          - npm run test
+        failure:
+          always
+
+    - step:
+        name: Build
+        script:
+          - npm run build
+        failure:
+          always
