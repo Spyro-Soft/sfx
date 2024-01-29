@@ -33,6 +33,7 @@ jobs:
         run: |
           npm i
           npm i --prefix 'libs/sfx'
+          npm i --prefix 'libs/spyro-architecture-plugin'
           npx nx local-registry &
           sleep 10
           npx nx run-many --targets=publish-local
