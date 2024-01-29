@@ -10,11 +10,7 @@ defaults:
   run:
     shell: bash
 
-<<<<<<< HEAD
 jobs:
-=======
-jobs:       
->>>>>>> 3e697f9 (chore: Create GitHub Actions workflows (#6))
   Build:
     strategy:
       matrix:
@@ -37,10 +33,6 @@ jobs:
         run: |
           npm i
           npm i --prefix 'libs/sfx'
-<<<<<<< HEAD
-          npm i --prefix 'libs/spyro-architecture-plugin'
-=======
->>>>>>> 3e697f9 (chore: Create GitHub Actions workflows (#6))
           npx nx local-registry &
           sleep 10
           npx nx run-many --targets=publish-local
@@ -48,17 +40,10 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-<<<<<<< HEAD
-          name: '${{ env.GIT_ARTIFACT_NAME }}'
-          path: dist
-          retention-days: 1
-
-=======
           name: "${{ env.GIT_ARTIFACT_NAME }}"
           path: dist
           retention-days: 1
   
->>>>>>> 3e697f9 (chore: Create GitHub Actions workflows (#6))
   Create-and-Test:
     strategy:
       matrix:
@@ -74,15 +59,9 @@ jobs:
           - webpack
         include:
           - framework: react
-<<<<<<< HEAD
-            extra_args: ''
-          - framework: angular
-            extra_args: '--routing=true --standaloneComponents=false'
-=======
             extra_args: ""
           - framework: angular
             extra_args: "--routing=true --standaloneComponents=false"
->>>>>>> 3e697f9 (chore: Create GitHub Actions workflows (#6))
     runs-on: ${{ matrix.platform }}
     needs: Build
     steps:
