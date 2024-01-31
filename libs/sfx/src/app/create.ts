@@ -105,13 +105,12 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     if (code === 0) {
       commitAllChanges();
       displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
-      if (process.platform === 'win32') {
-        process.exit();
-      }
+      process.exit();
     }
     handleError(new InstallationError());
   });
   command.stderr.on('data', (error) => {
+    console.log(error.toString())
     if (error.includes(`.git can't be found `)) {
       handleError(new GitExistsInstallationError());
     }
