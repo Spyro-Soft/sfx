@@ -105,7 +105,9 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     if (code === 0) {
       commitAllChanges();
       displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
-      //process.exit();
+      if(process.platform === "win32") {
+        process.exit();
+      }
     }
     handleError(new InstallationError());
   });
