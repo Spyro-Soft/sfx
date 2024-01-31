@@ -110,7 +110,7 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     handleError(new InstallationError());
   });
   command.stderr.on('data', (error) => {
-    console.log(error.toString())
+    console.log(error.toString());
     if (error.includes(`.git can't be found `)) {
       handleError(new GitExistsInstallationError());
     }
