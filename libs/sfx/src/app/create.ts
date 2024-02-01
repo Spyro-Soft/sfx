@@ -119,7 +119,7 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   console.log('stdout', command1.stdout.toString())
   console.log('status', command1.status.toString())
   console.log('stderr', command1.stderr.toString())
-  console.log('error', command1.erro.toString())
+  console.log('error', command1.error.toString())
   // command.on('close', (code) => {
   //   console.log(code)
   //   if (code === 0) {
