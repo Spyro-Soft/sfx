@@ -93,6 +93,8 @@ jobs:
         run: |
           cd "dist/libs/sfx"
           npm i
+          npm i -g .
+          cd "../../.."
           npx sfx create --framework="${{ matrix.framework }}" --bundler="${{ matrix.bundler }}" --monorepoName="${{ env.MONOREPO_NAME }}" ${{ matrix.extra_args }} --errorMonitoringConsent="false" --repositoryPlatforms="Github" --appName="testapp"
       - name: Test app - prepare
         run: |
