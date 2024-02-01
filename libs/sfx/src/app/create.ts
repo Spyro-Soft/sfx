@@ -104,14 +104,14 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   const command1 = spawnSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`);
   console.log('output', command.output)
   console.log('stdout', command.stdout)
-  console.log('error', command.error)
   console.log('status', command.status)
   console.log('stderr', command.stderr)
+  console.log('error', command.error)
   console.log('output', command1.output)
   console.log('stdout', command1.stdout)
-  console.log('error', command1.error)
   console.log('status', command1.status)
   console.log('stderr', command1.stderr)
+  console.log('error', command1.error)
   // command.on('close', (code) => {
   //   console.log(code)
   //   if (code === 0) {
