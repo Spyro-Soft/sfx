@@ -100,22 +100,18 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
-  const command = spawn(toExecute, { shell: true, stdio: 'inherit'});
-  // command.on('close', (code) => {
-  //   console.log(code)
-  //   if (code === 0) {
-  //     // commitAllChanges();
-  //     displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
-  //   }
-  //   handleError(new InstallationError());
-  // });
-  command.on('exit', (code) => {
+  const command = spawn(toExecute, { shell: true, stdio: 'overlapped'});
+  command.on('close', (code) => {
     console.log(code)
     if (code === 0) {
       // commitAllChanges();
       displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
+      if (process.platform === 'win32') {
+        process.exit();
+      }
     }
-  })
+    // handleError(new InstallationError());
+  });
 
   command.stderr.on('data', (error) => {
     console.log(error.toString());
