@@ -103,7 +103,10 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   const command0 = execSync('ls -a');
   const command = execSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact');
   const command1 = execSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`);
-//   console.log('path', process.env.PATH)
+  console.log(command0.toString())
+  console.log(command.toString())
+  console.log(command1.toString())
+  //   console.log('path', process.env.PATH)
 //   console.log('ls', command0.output)
 //  console.log('output', command0.output)
 //  console.log('stdout', command0.stdout)
