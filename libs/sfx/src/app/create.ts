@@ -100,9 +100,9 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
-  const command0 = spawnSync('ls -a', { shell: true });
-  const command = spawnSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact', { shell: true });
-  const command1 = spawnSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`, { shell: true });
+  const command0 = spawnSync('ls -a', { shell: true, cwd: './' });
+  const command = spawnSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact', { shell: true, cwd: './' });
+  const command1 = spawnSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`, { shell: true, cwd: './' });
     console.log('path', process.env.PATH)
   console.log('ls', command0.output)
  console.log('output', command0.output.toString())
