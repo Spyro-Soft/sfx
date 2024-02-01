@@ -1,4 +1,4 @@
-import { exec, spawn, spawnSync } from 'child_process';
+import { exec, execSync, spawn, spawnSync } from 'child_process';
 import { createWorkspace } from 'create-nx-workspace';
 
 import { Config } from '../config/config.js';
@@ -100,26 +100,26 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
-  const command0 = spawnSync('ls -a');
-  const command = spawnSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact');
-  const command1 = spawnSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`);
-  console.log('path', process.env.PATH)
-  console.log('ls', command0.output)
- console.log('output', command0.output)
- console.log('stdout', command0.stdout)
- console.log('status', command0.status)
- console.log('stderr', command0.stderr)
- console.log('error', command0.error)
-  console.log('output', command.output)
-  console.log('stdout', command.stdout)
-  console.log('status', command.status)
-  console.log('stderr', command.stderr)
-  console.log('error', command.error)
-  console.log('output', command1.output)
-  console.log('stdout', command1.stdout)
-  console.log('status', command1.status)
-  console.log('stderr', command1.stderr)
-  console.log('error', command1.error)
+  const command0 = execSync('ls -a');
+  const command = execSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact');
+  const command1 = execSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`);
+//   console.log('path', process.env.PATH)
+//   console.log('ls', command0.output)
+//  console.log('output', command0.output)
+//  console.log('stdout', command0.stdout)
+//  console.log('status', command0.status)
+//  console.log('stderr', command0.stderr)
+//  console.log('error', command0.error)
+//   console.log('output', command.output)
+//   console.log('stdout', command.stdout)
+//   console.log('status', command.status)
+//   console.log('stderr', command.stderr)
+//   console.log('error', command.error)
+//   console.log('output', command1.output)
+//   console.log('stdout', command1.stdout)
+//   console.log('status', command1.status)
+//   console.log('stderr', command1.stderr)
+//   console.log('error', command1.error)
   // command.on('close', (code) => {
   //   console.log(code)
   //   if (code === 0) {
