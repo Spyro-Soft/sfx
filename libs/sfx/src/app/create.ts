@@ -100,7 +100,7 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
-  const command = spawnSync(toExecute, { shell: true, stdio: 'overlapped'});
+  const command = spawnSync(toExecute);
   console.log('output', command.output)
   console.log('stdout', command.stdout)
   console.log('error', command.error)
