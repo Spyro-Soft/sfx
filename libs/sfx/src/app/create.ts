@@ -100,19 +100,12 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
-  const command0 = spawnSync('ls -a', { shell: true, cwd: './' });
-  const command = spawnSync('npm i @spyrosoft/spyro-plugin-manager --save-dev --save-exact', { shell: true, cwd: './' });
-  const command1 = spawnSync(`npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`, { shell: true, cwd: './' });
+  const command = spawnSync(toExecute, { shell: true });
   console.log('output', command.output.toString())
   console.log('stdout', command.stdout.toString())
   console.log('status', command.status.toString())
   console.log('stderr', command.stderr.toString())
   console.log('error', command.error.toString())
-  console.log('output', command1.output.toString())
-  console.log('stdout', command1.stdout.toString())
-  console.log('status', command1.status.toString())
-  console.log('stderr', command1.stderr.toString())
-  console.log('error', command1.error.toString())
   // command.on('close', (code) => {
   //   console.log(code)
   //   if (code === 0) {
