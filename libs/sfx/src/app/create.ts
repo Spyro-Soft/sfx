@@ -101,11 +101,11 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
   const command = spawnSync(toExecute, { shell: true });
-  console.log('output', command.output.toString())
-  console.log('stdout', command.stdout.toString())
-  console.log('status', command.status.toString())
-  console.log('stderr', command.stderr.toString())
-  console.log('error', command.error.toString())
+  console.log('output', command.output)
+  console.log('stdout', command.stdout)
+  console.log('status', command.status)
+  console.log('stderr', command.stderr)
+  console.log('error', command.error)
   // command.on('close', (code) => {
   //   console.log(code)
   //   if (code === 0) {
