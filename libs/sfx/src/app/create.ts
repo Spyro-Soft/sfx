@@ -104,7 +104,6 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   const command = spawn(toExecute, { shell: true });
 
   command.on('close', (code) => {
-    console.log(code);
     if (code === 0) {
       commitAllChanges();
       displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
@@ -114,13 +113,14 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   });
 
   command.stderr.on('data', (error) => {
-    console.log(error.toString());
     if (error.includes(`.git can't be found `)) {
       handleError(new GitExistsInstallationError());
     }
   });
 
-  command.stdout.on('data', (data) => {
-    displayMessage(data.toString());
-  });
+  if (verbose) {
+    command.stdout.on('data', (data) => {
+      displayMessage(data.toString());
+    });
+  }
 }
