@@ -14,8 +14,7 @@ module.exports = {
     [
       '@semantic-release/exec',
       {
-        prepareCmd:
-          'VERSION=${nextRelease.version} npx nx run-many -t publish --parallel=${numberOfLibrariesToRunSimultaneously}',
+        prepareCmd: `VERSION=\${nextRelease.version} npx nx run-many -t publish --parallel=${numberOfLibrariesToRunSimultaneously}`,
       },
     ],
     [

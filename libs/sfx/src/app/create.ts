@@ -1,4 +1,4 @@
-import { exec, execSync, spawn, spawnSync } from 'child_process';
+import { spawn } from 'child_process';
 import { createWorkspace } from 'create-nx-workspace';
 
 import { Config } from '../config/config.js';
