@@ -46,11 +46,11 @@ function getCreateWorkspaceOptions(answers: IFormOptionsCreate): TCreateNxWorksp
     nxCloud: false,
     appName: answers.appName,
     bundler: answers.bundler,
-    commit: {
-      name: 'sfx',
-      email: 'sfx',
-      message: 'innitial commit',
-    },
+    // commit: {
+    //   name: 'sfx',
+    //   email: 'sfx',
+    //   message: 'innitial commit',
+    // },
     ...frameworkOptions,
   };
 }
