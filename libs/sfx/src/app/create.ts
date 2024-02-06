@@ -101,31 +101,28 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
 
-  const command = spawnSync(toExecute, { shell: true, maxBuffer: 1024 * 500 });
-  console.log(command.output);
-  console.log(command.error);
-  console.log(command.stdout);
+  const command = spawn(toExecute, { shell: true });
 
-  // command.on('close', (code) => {
-  //   console.log(code);
-  //   if (code === 0) {
-  //     // commitAllChanges();
-  //     displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
-  //     if (process.platform === 'win32') {
-  //       process.exit();
-  //     }
-  //   }
-  //   // handleError(new InstallationError());
-  // });
+  command.on('close', (code) => {
+    console.log(code);
+    if (code === 0) {
+      commitAllChanges();
+      displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
+      if (process.platform === 'win32') {
+        process.exit();
+      }
+    }
+    handleError(new InstallationError());
+  });
 
-  // command.stderr.on('data', (error) => {
-  //   console.log(error.toString());
-  //   if (error.includes(`.git can't be found `)) {
-  //     handleError(new GitExistsInstallationError());
-  //   }
-  // });
+  command.stderr.on('data', (error) => {
+    console.log(error.toString());
+    if (error.includes(`.git can't be found `)) {
+      handleError(new GitExistsInstallationError());
+    }
+  });
 
-  // command.stdout.on('data', (data) => {
-  //   displayMessage(data.toString());
-  // });
+  command.stdout.on('data', (data) => {
+    displayMessage(data.toString());
+  });
 }
