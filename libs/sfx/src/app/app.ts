@@ -53,6 +53,7 @@ export function callInquirerAndProcessAnswers(cliArguments: ICliArguments): void
       },
       cliArguments.verbose
     );
+    return;
   }
   switch (cliArguments.operationType) {
     case OPERATION_TYPE.create: {

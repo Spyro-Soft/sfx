@@ -100,7 +100,9 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     `npx nx g @spyrosoft/spyro-plugin-manager:setup-all --appName=${baseOptions.appName} --framework=${baseOptions.framework} --ciCd=${answers.repositoryPlatforms} --extend=false --interactive=false`,
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
+
   const command = spawn(toExecute, { shell: true });
+
   command.on('close', (code) => {
     if (code === 0) {
       commitAllChanges();
@@ -109,11 +111,13 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
     }
     handleError(new InstallationError());
   });
+
   command.stderr.on('data', (error) => {
     if (error.includes(`.git can't be found `)) {
       handleError(new GitExistsInstallationError());
     }
   });
+
   if (verbose) {
     command.stdout.on('data', (data) => {
       displayMessage(data.toString());

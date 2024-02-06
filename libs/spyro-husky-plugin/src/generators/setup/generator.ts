@@ -15,7 +15,7 @@ export async function setupGenerator(tree: Tree) {
     tree,
     {},
     {
-      husky: 'latest',
+      husky: '8.0.3',
       '@commitlint/cli': '^17.6.5',
       '@commitlint/config-conventional': '^17.6.5',
     }
@@ -25,7 +25,7 @@ export async function setupGenerator(tree: Tree) {
     pckgJson.scripts.prepare = 'npx husky install';
     return pckgJson;
   });
-  execSync('npx husky install');
+  execSync('npx husky@8.0.3 install');
 
   addCommitMsgHook(tree);
   addPrePushHook(tree);
@@ -55,7 +55,7 @@ function generateCommitMsgFiles(tree: Tree, hookFilePath: string) {
   const projectRoot = './';
   const commands = 'npx --no-install commitlint --edit "$1"';
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {});
-  execSync(`npx husky add ${hookFilePath} "${commands}"`);
+  execSync(`npx husky@8.0.3 add ${hookFilePath} "${commands}"`);
 }
 
 function addPrePushHook(tree: Tree) {
@@ -76,7 +76,7 @@ function generatePrePushFile(hookFilePath: string) {
     'npx nx run-many --target=test --all --parallel --skip-nx-cache',
   ];
   const hookCommands = commands.reduce((a, b) => a + ' && ' + b);
-  execSync(`npx husky add ${hookFilePath} "${hookCommands}"`);
+  execSync(`npx husky@8.0.3 add ${hookFilePath} "${hookCommands}"`);
 }
 
 export default setupGenerator;
