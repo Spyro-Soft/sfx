@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { exec, execSync, spawn, spawnSync } from 'child_process';
 import { createWorkspace } from 'create-nx-workspace';
 
 import { Config } from '../config/config.js';
@@ -101,25 +101,31 @@ function installAdditionalLibraries(baseOptions: IBaseOptions, answers: IFormOpt
   ];
   const toExecute = commands.reduce((a, b) => a + ' && ' + b);
 
-  const command = spawn(toExecute);
-  command.on('close', (code) => {
-    if (code === 0) {
-      commitAllChanges();
-      displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
-      if (process.platform === 'win32') {
-        process.exit();
-      }
-    }
-    handleError(new InstallationError());
-  });
+  const command = spawnSync(toExecute, { shell: true, maxBuffer: 1024 * 500 });
+  console.log(command.output);
+  console.log(command.error);
+  console.log(command.stdout);
 
-  command.stderr.on('data', (error) => {
-    if (error.includes(`.git can't be found `)) {
-      handleError(new GitExistsInstallationError());
-    }
-  });
+  // command.on('close', (code) => {
+  //   console.log(code);
+  //   if (code === 0) {
+  //     // commitAllChanges();
+  //     displayMessage(['Your application is ready for development', `Thank you for using ${Config.cliName}!`]);
+  //     if (process.platform === 'win32') {
+  //       process.exit();
+  //     }
+  //   }
+  //   // handleError(new InstallationError());
+  // });
 
-  command.stdout.on('data', (data) => {
-    displayMessage(data.toString());
-  });
+  // command.stderr.on('data', (error) => {
+  //   console.log(error.toString());
+  //   if (error.includes(`.git can't be found `)) {
+  //     handleError(new GitExistsInstallationError());
+  //   }
+  // });
+
+  // command.stdout.on('data', (data) => {
+  //   displayMessage(data.toString());
+  // });
 }
