@@ -1,6 +1,6 @@
 {
   "name": "@spyrosoft/spyro-husky-plugin",
-  "version": "1.8.0",
+  "version": "1.8.2",
   "type": "commonjs",
   "generators": "./generators.json",
   "scripts": {

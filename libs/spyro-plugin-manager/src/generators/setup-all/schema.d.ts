@@ -3,4 +3,5 @@ export interface ISetupAllGeneratorSchema {
   framework: string;
   extend: boolean;
   ciCd: string;
+  repositoryName: string;
 }
