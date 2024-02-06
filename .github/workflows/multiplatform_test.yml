@@ -10,7 +10,7 @@ defaults:
   run:
     shell: bash
 
-jobs:       
+jobs:
   Build:
     strategy:
       matrix:
@@ -41,10 +41,10 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ env.GIT_ARTIFACT_NAME }}"
+          name: '${{ env.GIT_ARTIFACT_NAME }}'
           path: dist
           retention-days: 1
-  
+
   Create-and-Test:
     strategy:
       matrix:
@@ -60,9 +60,9 @@ jobs:
           - webpack
         include:
           - framework: react
-            extra_args: ""
+            extra_args: ''
           - framework: angular
-            extra_args: "--routing=true --standaloneComponents=false"
+            extra_args: '--routing=true --standaloneComponents=false'
     runs-on: ${{ matrix.platform }}
     needs: Build
     steps:
@@ -86,10 +86,9 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: "${{ env.GIT_ARTIFACT_NAME }}"
-          path: "./dist"
+          name: '${{ env.GIT_ARTIFACT_NAME }}'
+          path: './dist'
       - name: Create App
-        continue-on-error: true
         run: |
           cd "dist/libs/sfx"
           npm i
@@ -127,6 +126,6 @@ jobs:
       - name: Upload Test Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ env.GIT_REF_PARSED }}-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}-${{ env.GIT_SHA_SHORT }}"
-          path: "${{ env.MONOREPO_NAME }}/screenshot.jpg"
+          name: '${{ env.GIT_REF_PARSED }}-${{ matrix.platform }}-${{ matrix.framework }}-${{ matrix.bundler }}-${{ env.GIT_SHA_SHORT }}'
+          path: '${{ env.MONOREPO_NAME }}/screenshot.jpg'
           retention-days: ${{ env.RETENTION_DAYS }}
