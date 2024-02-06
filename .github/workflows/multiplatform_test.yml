@@ -40,10 +40,10 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "${{ env.GIT_ARTIFACT_NAME }}"
+          name: '${{ env.GIT_ARTIFACT_NAME }}'
           path: dist
           retention-days: 1
-  
+
   Create-and-Test:
     strategy:
       matrix:
@@ -59,9 +59,9 @@ jobs:
           - webpack
         include:
           - framework: react
-            extra_args: ""
+            extra_args: ''
           - framework: angular
-            extra_args: "--routing=true --standaloneComponents=false"
+            extra_args: '--routing=true --standaloneComponents=false'
     runs-on: ${{ matrix.platform }}
     needs: Build
     steps:
