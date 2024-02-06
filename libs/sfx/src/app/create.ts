@@ -30,9 +30,9 @@ export async function processAppQuestionareCreate(answers: IFormOptionsCreate, v
 
   const nxTemplateName = getNxTemplateNameForFramework(answers.framework);
   const createWorkspaceOptions = getCreateWorkspaceOptions(answers);
-  await createWorkspace(nxTemplateName, createWorkspaceOptions).catch((err) => {
-    handleError(err);
-  });
+  // await createWorkspace(nxTemplateName, createWorkspaceOptions).catch((err) => {
+  //   handleError(err);
+  // });
   displayMessage('Project set up, installing additional libraries...');
   completeInstallation(baseOptions, answers, verbose);
 }
