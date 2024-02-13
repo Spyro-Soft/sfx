@@ -1,16 +1,13 @@
-name: Release New Version
+name: Release
 on:
   push:
     branches:
       - main
-
 defaults:
   run:
     shell: bash
 
 jobs:
-  Call-Tests:
-    uses: ./.github/workflows/multiplatform_test.yml
   Release:
     permissions:
       contents: write
@@ -18,29 +15,27 @@ jobs:
       pull-requests: write
       id-token: write
     runs-on: ubuntu-latest
-    needs: Call-Tests
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup Node
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/iron"
-      - name: Install Project Dependencies
-        run: npm i \
-          npm i --prefix 'libs/sfx' \
-          npm i --prefix 'libs/spyro-architecture-plugin' 
-      - name: Install requirements
+          node-version: 18
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Build (Optional)
         run: |
-          npm install -g \
-            semantic-release \
-            @semantic-release/git \
-            @semantic-release/changelog \
-            @semantic-release/exec
+          npm run build
+
       - name: Release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
