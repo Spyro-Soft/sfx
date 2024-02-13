@@ -8,6 +8,8 @@ You can differentiate 3 types of packages here:
 - Nx plugins, where every plugin's role is to provide a specific configuration to created workspace. The SFX only installs our `spyro-plugin-manager`, which role is to install and run all the other plugins. This is important, as each new plugin has to be set in the manager plugin in order for SFX to use it.
 - Separate packages, like `eslint-config-spyro` which does not need Nx.
 
+You can see our [Demo project](https://github.com/Spyro-Soft/sfx-demo-ecommerce) created entirely with usage of this CLI.
+
 # Table of contents
 - [Prerequisites](#prerequisites)
 - [Folder structure](#folder-structure)
@@ -71,7 +73,7 @@ Remember that verdaccio works almost exactly like npm, which means that you have
 
 # Releasing to production
 
-> **_IMPORTANT:_** Our repository has now a `semantic-release` set up in a GitLab pipeline. This means that every merge to the `main` branch will call an automatic release to `npm`, which also involves an automatic version bump for CLI and every plugin. A new version will be calculated based on the last tag vith version pushed by the pipeline if the job succeeded, which means that **manual releases, or tag creations might break the entire process**. Therefore, refrain from performing any of those actions unless absolutely necessary. 
+> **_IMPORTANT:_** Our repository has now a `semantic-release` set up in a Gtihub actions. This means that every merge to the `main` branch will call an automatic release to `npm`, which also involves an automatic version bump for CLI and every plugin. A new version will be calculated based on the last tag vith version pushed by the pipeline if the job succeeded, which means that **manual releases, or tag creations might break the entire process**. Therefore, refrain from performing any of those actions unless absolutely necessary. 
 
 Since the npm registry is our prod here, releasing to production means pushing new version to npm. In order to push anything, you need access to the [@spyrosoft](https://www.npmjs.com/org/spyrosoft) organization on npm. 
 
