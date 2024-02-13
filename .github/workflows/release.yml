@@ -29,7 +29,9 @@ jobs:
         with:
           node-version: "lts/iron"
       - name: Install Project Dependencies
-        run: npm install
+        run: npm i \
+          npm i --prefix 'libs/sfx' \
+          npm i --prefix 'libs/spyro-architecture-plugin' 
       - name: Install requirements
         run: |
           npm install -g \
