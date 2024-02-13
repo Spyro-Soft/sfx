@@ -30,14 +30,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install semantic release
-        run: |
-            npm install -g \
-            semantic-release \
-            @semantic-release/git \
-            @semantic-release/changelog \
-            @semantic-release/exec
-
       - name: Release
         run: npx semantic-release
         env:
