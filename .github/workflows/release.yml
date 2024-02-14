@@ -21,15 +21,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.8.1'
-          registry-url: 'https://registry.npmjs.org/'
+          node-version: '20.11.0'
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build Projects
         run: |
-          npx nx run spyro-architecture-plugin:build
+          npm i
+          npm i --prefix 'libs/sfx'
+          npm i --prefix 'libs/spyro-architecture-plugin'
+          npx nx local-registry &
+          sleep 10
+          npx nx run-many --targets=publish-local
           npx nx run sfx:build
 
       - name: Install Semantic Release and Plugins
