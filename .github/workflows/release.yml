@@ -26,25 +26,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.11.0'
-
+          node-version: 'lts/iron'
       - name: Install Dependencies
-        run: npm install
-
-      - name: Build Projects
         run: |
           npm i
           npm i --prefix 'libs/sfx'
           npm i --prefix 'libs/spyro-architecture-plugin'
-          npx nx local-registry &
-          sleep 10
-          npx nx run-many --targets=publish-local
-          npx nx run sfx:build
-
-      - name: Install Semantic Release and Plugins
-        run: |
-          npm install semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec
-
+          npm install -g \
+            semantic-release \
+            @semantic-release/git \
+            @semantic-release/changelog \
+            @semantic-release/exec
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
