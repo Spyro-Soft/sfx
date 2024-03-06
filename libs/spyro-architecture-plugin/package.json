@@ -1,6 +1,6 @@
 {
   "name": "@spyrosoft/spyro-architecture-plugin",
-  "version": "0.1.11",
+  "version": "2.1.3",
   "dependencies": {
     "@nx/devkit": "16.8.1",
     "inquirer": "^8.2.6",

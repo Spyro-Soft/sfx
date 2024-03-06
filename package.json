@@ -1,6 +1,6 @@
 {
   "name": "@spyrosoft/sfx",
-  "version": "2.0.2",
+  "version": "2.1.3",
   "license": "MIT",
   "description": "frontend development CLI for quick project setup and configuration",
   "scripts": {
